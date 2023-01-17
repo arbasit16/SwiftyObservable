@@ -1,3 +1,3 @@
 # SwiftyObservable
 
-A description of this package.
+A lighweight package for observing values
