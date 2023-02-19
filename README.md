@@ -14,7 +14,7 @@ You can install SwiftyObservable using Swift Package Manager. Simply add the fol
 
 To use the Observable property wrapper, simply add it to your property declaration like this:
 
-```
+```swift
 @Observable var someProperty: String = "initial value"
 ```
 
@@ -24,7 +24,7 @@ SwiftyObserver provides three observers that can be added to a property
 
 The closure observer is the simplest observer and accepts a closure to be called when the property's value changes. The closure will be passed the new value of the property.
 
-```
+```swift
 $someProperty.changeHandler { newValue in
     // Do something with the new value
 }
@@ -34,7 +34,7 @@ $someProperty.changeHandler { newValue in
 
 The binding observer updates the value of a key path on an object when the property's value changes. The object must be of the same type as the property's value.
 
-```
+```swift
 class MyClass {
 
     @Observable var myProperty: String? = "initial value"
@@ -52,7 +52,7 @@ myObject.$myProperty.bind(to: \.text, on: myLabel)
 
 The notification observer posts a notification when the property's value changes. You can specify the notification name. The notification's `userInfo` contains the updated value of the propery
 
-```
+```swift
 $someProperty.notify(with: Notification.Name("SomePropertyDidChange"))
 ```
 
@@ -60,7 +60,7 @@ $someProperty.notify(with: Notification.Name("SomePropertyDidChange"))
 
 You can also create a custom observer by implementing the `Observer` protocol. This allows you to define your own behavior when the property's value changes. The `Observer` protocol is generic, with an associated type Value that corresponds to the type of the observed property.
 
-```
+```swift
 class MyObserver: Observer {
 
     typealias Value = String
@@ -81,6 +81,15 @@ class MyObserver: Observer {
     }
     
 ```
+
+Then add the observer using `addObserver` method
+
+```swift
+$someProperty.addObserver(myObserver)
+```
+
+
+SwiftyObservable also provides way for storing and removing observers
 
 ## Contributing
 
