@@ -26,5 +26,13 @@ public extension Observer {
     func store(in observers: inout Set<AnyDisposable>) {
         observers.insert(AnyDisposable(self))
     }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
 
 }
