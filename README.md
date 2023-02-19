@@ -1,5 +1,9 @@
 # SwiftyObservable
 
+[![Swift](https://img.shields.io/badge/Swift-5.5-orange.svg)](https://swift.org/about/)
+[![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-orange.svg)](https://swift.org/package-manager/)
+[![License](https://img.shields.io/badge/License-MIT-lightgray.svg)](LICENSE)
+
 SwiftyObservable provides an `Observable` property wrapper that enables you to easily add observers to your properties. With just a few lines of code, you can trigger a closure, post a notification, or update a key path whenever the observed property's value changes.
 
 ## Installation
