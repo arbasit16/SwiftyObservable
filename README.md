@@ -72,14 +72,6 @@ class MyObserver: Observer {
         // your custom behaviour
     }
     
-    static func == (lhs: MyObserver, rhs: MyObserver) -> Bool {
-        // provide custom equating behaviour
-    }
-        
-    func hash(into hasher: inout Hasher) {
-        // provide custom hashing behaviour
-    }
-    
 ```
 
 Then add the observer using `addObserver` method
@@ -88,6 +80,39 @@ Then add the observer using `addObserver` method
 $someProperty.addObserver(myObserver)
 ```
 
+### Storing Observer
+
+Observers can be stored using `Set` of `AnyDisposable`. The type `AnyDisposable` is provided by SwiftyObservable and it allows you to remove the observer. An observer can be stored by calling its `store` method
+
+```swift
+class MyClass {
+
+    @Observable var someProperty: String = "some value"
+    
+    var observers = Set<AnyDisposable>()
+    
+    func setupObserver() {
+        $someProperty
+            .changeHandler({ newValue in
+                // Do something
+            })
+            .store(in: &observers)
+    }
+}
+```
+
+The observer can then be removed by calling its `dispose` method
+
+```swift
+
+extension MyClass {
+
+    func removeObservers() {
+        observers.forEach({ $0.dispose() })
+    }
+    
+}
+```
 
 SwiftyObservable also provides way for storing and removing observers
 
